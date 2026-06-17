@@ -742,7 +742,8 @@ bool ImageManager::GetMappedImageDevice(const std::string& name, std::string* de
 
 bool ImageManager::MapAllImages(const std::function<bool(std::set<std::string>)>& init) {
     if (!MetadataExists(metadata_dir_)) {
-        return true;
+        LOG(ERROR) << "Metadata directory does not exist: " << metadata_dir_;
+        return false;
     }
 
     auto metadata = OpenMetadata(metadata_dir_);
